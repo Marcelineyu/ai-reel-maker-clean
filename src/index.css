@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --surface-soft: #f3f1fa;
+  --text-primary: #1a1f2e;
+  --text-secondary: #6b7280;
+  --border: #e4e7ef;
+  --primary: #6b57eb;
+  --primary-dark: #5a46d6;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Manrope, 'Plus Jakarta Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg);
+  color: var(--text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-medium text-white bg-primary hover:bg-primary-dark active:scale-[0.99] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-medium text-text-primary bg-surface border border-border hover:bg-surface-soft hover:border-primary/25 active:scale-[0.99] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium text-white bg-text-primary hover:bg-text-primary/90 active:scale-[0.99] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .card {
+    @apply bg-surface border border-border rounded-xl shadow-card;
+  }
+
+  .card-hover {
+    @apply transition-shadow hover:shadow-card-hover;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg bg-surface border border-border text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-colors disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .section-label {
+    @apply text-xs font-medium uppercase tracking-wide text-text-secondary;
+  }
+
+  .sidebar-link {
+    @apply px-3 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-surface-soft transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary;
+  }
+
+  .sidebar-link-active {
+    @apply text-text-primary bg-surface-soft;
+  }
+
+  .preview-image-fallback {
+    @apply w-full h-full flex flex-col items-center justify-center gap-1.5 bg-surface-soft text-text-secondary;
+  }
+}

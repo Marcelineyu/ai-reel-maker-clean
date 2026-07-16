@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm start",
+  "outputDirectory": "build",
+  "rewrites": [
+    {
+      "source": "/((?!api/|static/|sockjs-node|favicon\\.ico|manifest\\.json|robots\\.txt|.*\\.(?:txt|png|jpg|jpeg|gif|svg|ico|json|js|css|map|woff2?|ttf|eot)).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
