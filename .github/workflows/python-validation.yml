@@ -1,0 +1,25 @@
+name: Python Validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run Python unit tests
+        run: python -m unittest discover -s tests -p "test_*.py"
+
+      - name: Run repository validator
+        run: python scripts/validate_project.py
