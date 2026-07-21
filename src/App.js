@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import LandingPage from './components/LandingPage';
 import Studio from './components/Studio';
-import { getViewFromHash } from './utils/navigation';
+import { getViewFromPath, navigateTo } from './utils/navigation';
 
 function App() {
-  const [view, setView] = useState(() => getViewFromHash());
+  const [view, setView] = useState(() => getViewFromPath());
 
   useEffect(() => {
-    const onHashChange = () => setView(getViewFromHash());
-    window.addEventListener('hashchange', onHashChange);
-    if (!window.location.hash) {
-      window.location.hash = '#/';
+    const onPopState = () => setView(getViewFromPath());
+    window.addEventListener('popstate', onPopState);
+
+    if (window.location.hash) {
+      const legacyPath = window.location.hash.replace(/^#/, '') || '/';
+      const targetPath = legacyPath === '/studio' ? '/studio' : '/';
+      const targetView = getViewFromPath(targetPath);
+      window.history.replaceState({ view: targetView }, '', targetPath);
+      setView(targetView);
     }
-    return () => window.removeEventListener('hashchange', onHashChange);
+
+    const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+    if (currentPath !== '/' && currentPath !== '/studio') {
+      window.history.replaceState({ view: 'landing' }, '', '/');
+      setView('landing');
+    }
+
+    return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
   if (view === 'studio') {
-    return <Studio onGoHome={() => setView('landing')} />;
+    return <Studio onGoHome={() => navigateTo('landing')} />;
   }
 
-  return <LandingPage onOpenStudio={() => setView('studio')} />;
+  return <LandingPage onOpenStudio={() => navigateTo('studio')} />;
 }
 
 export default App;
