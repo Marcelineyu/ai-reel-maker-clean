@@ -25,6 +25,20 @@ module.exports = {
         'card-hover': '0 4px 16px rgba(26, 31, 46, 0.06)',
         float: '0 8px 30px rgba(26, 31, 46, 0.08)',
       },
+      keyframes: {
+        'contact-fade': {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        'contact-panel': {
+          from: { opacity: '0', transform: 'translateY(8px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'contact-fade': 'contact-fade 150ms ease-out',
+        'contact-panel': 'contact-panel 180ms ease-out',
+      },
     },
   },
   plugins: [],

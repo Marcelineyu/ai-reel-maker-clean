@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LandingSidebar from './LandingSidebar';
 import HeroPreview from './HeroPreview';
 import FeatureGrid from './FeatureGrid';
@@ -6,9 +6,12 @@ import HowItWorks from './HowItWorks';
 import ProductPreview from './ProductPreview';
 import UseCases from './UseCases';
 import Footer from './Footer';
+import ContactModal from './ContactModal';
 import { navigateTo } from '../utils/navigation';
 
 export default function LandingPage({ onOpenStudio }) {
+  const [contactOpen, setContactOpen] = useState(false);
+
   const openStudio = () => {
     onOpenStudio?.();
     navigateTo('studio');
@@ -18,7 +21,7 @@ export default function LandingPage({ onOpenStudio }) {
 
   return (
     <div className="min-h-screen bg-bg">
-      <LandingSidebar onOpenStudio={onOpenStudio} />
+      <LandingSidebar onOpenStudio={onOpenStudio} onOpenContact={() => setContactOpen(true)} />
 
       <div className="lg:ml-[260px] min-w-0">
         <section id="overview" className="scroll-mt-14 lg:scroll-mt-0">
@@ -59,8 +62,10 @@ export default function LandingPage({ onOpenStudio }) {
           </div>
         </section>
 
-        <Footer onOpenStudio={onOpenStudio} />
+        <Footer onOpenStudio={onOpenStudio} onOpenContact={() => setContactOpen(true)} />
       </div>
+
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </div>
   );
 }

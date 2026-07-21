@@ -21,7 +21,7 @@ function NavLink({ id, label, onNavigate, active, className = '' }) {
   );
 }
 
-export default function LandingSidebar({ onOpenStudio }) {
+export default function LandingSidebar({ onOpenStudio, onOpenContact }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('overview');
 
@@ -29,6 +29,11 @@ export default function LandingSidebar({ onOpenStudio }) {
     setDrawerOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setActiveSection(id);
+  };
+
+  const openContact = () => {
+    setDrawerOpen(false);
+    onOpenContact?.();
   };
 
   const openStudio = () => {
@@ -69,6 +74,9 @@ export default function LandingSidebar({ onOpenStudio }) {
         {NAV_ITEMS.map((item) => (
           <NavLink key={item.id} id={item.id} label={item.label} onNavigate={scrollTo} active={activeSection === item.id} />
         ))}
+        <button type="button" onClick={openContact} className="sidebar-link w-full text-left">
+          Contact
+        </button>
       </nav>
 
       <div className="px-4 pb-6 pt-4 border-t border-border mt-auto">

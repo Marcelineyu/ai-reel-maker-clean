@@ -1,7 +1,7 @@
 import React from 'react';
 import { navigateTo } from '../utils/navigation';
 
-export default function Footer({ onOpenStudio }) {
+export default function Footer({ onOpenStudio, onOpenContact }) {
   const openStudio = () => {
     onOpenStudio?.();
     navigateTo('studio');
@@ -20,6 +20,7 @@ export default function Footer({ onOpenStudio }) {
           <button type="button" onClick={() => scrollTo('features')} className="text-text-secondary hover:text-text-primary transition-colors">Features</button>
           <button type="button" onClick={() => scrollTo('how-it-works')} className="text-text-secondary hover:text-text-primary transition-colors">How It Works</button>
           <button type="button" onClick={openStudio} className="text-text-secondary hover:text-text-primary transition-colors">Open Studio</button>
+          <button type="button" onClick={() => onOpenContact?.()} className="text-text-secondary hover:text-text-primary transition-colors">Contact</button>
         </nav>
       </div>
       <p className="max-w-4xl xl:max-w-5xl mt-8 pt-6 border-t border-border text-xs text-text-secondary">
